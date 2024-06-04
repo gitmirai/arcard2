@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Instrument Animals</title>
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe@090b5f8f0abe949ddcfdbbc14c75822322a2dd53/dist/aframe-master.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+  </head>
+
+  <body style="margin : 0px; overflow: hidden;">
+    
+  <script>
+    AFRAME.registerComponent('marker-cooler', {
+      init: function () {
+        const marker = this.el;
+        marker.addEventListener('markerFound', function () {
+          audio_cooler.play();
+        });
+      }
+    });
+    window.onload = () => {
+      audio_cooler = document.getElementById('audio_cooler');
+    };
+
+  </script>
+
+    <!-- a-frame scene -->
+    <a-scene
+      vr-mode-ui="enabled: false;"
+      renderer="logarithmicDepthBuffer: true;"
+      embedded
+      arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;">
+
+      <a-assets>
+        <audio id ="audio_cooler" src="audio/audio.mp3" preload="auto"></audio>
+      </a-assets>
+
+      <!-- AR mark1 -->
+      <a-marker marker-cooler type="pattern" url="img/pattern_simple_qrcode.patt">
+      
+            <!-- icon -->
+            <a-image width="4" height="4" position="-0.8 0.4 0.4" rotation="-90 0 0" src="img/icon.png">
+            </a-image>
+
+            <!-- name -->
+            <!--
+            <a-image width="0.8" height="0.8" position="0.25 0.4 0.4" rotation="-90 0 0" src="img/name.png">
+            </a-image>
+             -->
+
+            <!-- description -->
+            <a-image width="1" height="1" position="-0.5 0.4 1.3" rotation="-90 0 0" src="img/profile.png">
+            </a-image>
+
+            <!-- contact -->
+            <!--
+            <a-image width="0.8" height="0.8" position="0.6 0.4 1.35" rotation="-90 0 0" src="img/contacts.png">
+            </a-image>
+             -->
+　　　　    
+          <!-- 日本語不可
+        　　<a-text position="-1 1.25 -3" value=str color="black"></a-text>
+           -->
+      </a-marker>
+
+      <a-entity camera></a-entity>
+      
+    </a-scene>
+  </body>
+</html>
